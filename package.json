@@ -1,5 +1,6 @@
 {
   "name": "projeto-erp-back",
+  "type": "module",
   "version": "1.0.0",
   "description": "Back-end do projeto erp",
   "main": "index.js",
