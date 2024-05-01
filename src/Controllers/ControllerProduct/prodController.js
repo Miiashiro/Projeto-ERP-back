@@ -18,4 +18,16 @@ routes.get('/', async(req, res) => {
     }
 })
 
+routes.post('/', async(req, res) => {
+    try{
+        const { name, desc, price, quant, quantMin, quantMax } = req.body
+
+        await db.createProduct(name, desc, price, quant, quantMin, quantMax)
+
+        res.status(200).send("Produto criado")
+    }catch(err){
+        res.status(500).send({message: `Erro ao cadastrar. Erro ${err}`})
+    }
+})
+
 export default routes
