@@ -19,4 +19,13 @@ async function createProduct(name, desc, price, quant, quantMin, quantMax){
     conn.end()
 }
 
-export default {showProduct, createProduct}
+async function alterProduct(id, name, desc, quant, price, quantMin, quantMax){
+    const sql = "UPDATE tbl_product SET product_name=?, description=?, quantity=?, price=?, quant_min=?, quant_max=? WHERE id_prod=?"
+    const data = [name, desc, quant, price, quantMin, quantMax, id]
+
+    const conn = await database.connect()
+    conn.query(sql, data)
+    conn.end()
+}
+
+export default {showProduct, createProduct, alterProduct}
