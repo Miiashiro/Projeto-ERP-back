@@ -32,14 +32,25 @@ routes.post('/', async (req, res) => {
 
 routes.put('/', async (req, res) => {
     try {
-        const { id, name, desc, quant, price, quantMin, quantMax } = req.body
+        const { id, name, desc, price, quant, quantMin, quantMax } = req.body
 
-        await db.alterProduct(id, name, desc, quant, price, quantMin, quantMax)
+        await db.alterProduct(id, name, desc, price, quant, quantMin, quantMax)
 
-        res.status(200).send("Produto alterado")
+        res.status(200).send("Produto alterado com sucesso")
     } catch (err) {
         res.status(500).send({ message: `Erro ao atualizar. Erro ${err}` })
     }
+})
 
+routes.delete('/:id', async(req, res) => {
+    try{
+        const {id} = req.params
+
+        await db.deleteProd(id)
+
+        res.status(200).send("Produto deletado com sucesso")
+    }catch(err){
+        res.status(500).send({message: `Erro ao deletar. Erro ${err}`})
+    }
 })
 export default routes

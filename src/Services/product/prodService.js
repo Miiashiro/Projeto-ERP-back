@@ -19,7 +19,7 @@ async function createProduct(name, desc, price, quant, quantMin, quantMax){
     conn.end()
 }
 
-async function alterProduct(id, name, desc, quant, price, quantMin, quantMax){
+async function alterProduct(id, name, desc, price, quant, quantMin, quantMax){
     const sql = "UPDATE tbl_product SET product_name=?, description=?, quantity=?, price=?, quant_min=?, quant_max=? WHERE id_prod=?"
     const data = [name, desc, quant, price, quantMin, quantMax, id]
 
@@ -28,4 +28,13 @@ async function alterProduct(id, name, desc, quant, price, quantMin, quantMax){
     conn.end()
 }
 
-export default {showProduct, createProduct, alterProduct}
+async function deleteProd(id){
+    const sql = "DELETE FROM tbl_product WHERE id_prod = ?"
+    const data = [id]
+
+    const conn = await database.connect()
+    conn.query(sql, data)
+    conn.end()
+}
+
+export default {showProduct, createProduct, alterProduct, deleteProd}
