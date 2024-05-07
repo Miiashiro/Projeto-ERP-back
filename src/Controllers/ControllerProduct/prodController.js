@@ -53,4 +53,5 @@ routes.delete('/:id', async(req, res) => {
         res.status(500).send({message: `Erro ao deletar. Erro ${err}`})
     }
 })
+
 export default routes
