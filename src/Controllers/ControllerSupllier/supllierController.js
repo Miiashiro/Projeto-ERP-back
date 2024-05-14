@@ -24,8 +24,35 @@ routes.post('/', async(req, res) => {
         await db.createSupllier(supllier, email, tel, cnpj, cep, address, neighborhood, city, country)
 
         res.status(200).send({ message: "Fornecedor criado." })
+
     }catch(err){
         res.status(500).send({ message: `Erro ao cadastrar. Erro ${err}` })
+    }
+})
+
+routes.put('/', async(req, res) => {
+    try{
+        const {id, supllier, email, tel, cnpj, cep, address, neighborhood, city, country} = req.body
+
+        await db.alterSupllier(id, supllier, email, tel, cnpj, cep, address, neighborhood, city, country)
+
+        res.status(200).send({ message: "Fornecedor alterado"})
+
+    } catch(err){
+        res.status(500).send({ message: `Erro ao alterar. Erro ${err}` })
+    }
+})
+
+routes.delete('/:id', async(req, res) => {
+    try{
+        const { id } = req.params
+
+        await db.deleteSupllier(id)
+
+        res.status(200).send("Fornecedor deletado com sucesso")
+    
+    }catch(err){
+        res.status(500).send({message: `Erro ao deletar. Erro ${err}`})
     }
 })
 
