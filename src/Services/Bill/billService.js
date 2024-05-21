@@ -19,4 +19,21 @@ async function createBill(bill, price, date){
     conn.end()
 } 
 
-export default {createBill, showBill}
+async function alterBill(id, bill, price, date){
+    const sql = "UPDATE tbl_bill SET name_bill = ?, price = ?, data_vencimento = ? WHERE id_bill = ?"
+    const data = [bill, price, date, id]
+
+    const conn = await database.connect()
+    conn.query(sql, data)
+    conn.end()
+}
+
+async function deleteBill(id){
+    const sql = "DELETE FROM tbl_bill WHERE id_bill = ?"
+    const data = [id]
+
+    const conn = await database.connect()
+    conn.query(sql, data)
+    conn.end()
+}
+export default {showBill, createBill, alterBill, deleteBill}

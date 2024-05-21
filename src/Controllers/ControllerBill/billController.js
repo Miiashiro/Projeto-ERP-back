@@ -27,7 +27,32 @@ routes.post('/', async(req, res) => {
         res.status(200).send("Conta criado")
 
     }catch(err){
-        res.status(500).send({ message: `Erro ao cadastrar` })
+        res.status(500).send({ message: `Erro ao cadastrar conta` })
+    }
+})
+
+routes.put('/', async(req, res) => {
+    try{
+        const { id, bill, price, date } = req.body
+
+        await db.alterBill(id, bill, price, date)
+
+        res.status(200).send("Conta atualizada")
+
+    }catch(err){
+        res.status(500).send({ message: `Erro ao atualizar conta` })
+    }
+})
+
+routes.delete('/:id', async(req, res) => {
+    try{
+        const {id} = req.params
+
+        await db.deleteBill(id)
+
+        res.status(200).send("Conta deletada com sucesso")
+    }catch(err){
+        res.status(500).send({message: `Erro ao deletar. Erro ${err}`})
     }
 })
 
