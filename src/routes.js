@@ -3,6 +3,7 @@ import cadastro from "./Controllers/ControllerStart/userController.js"
 import produto from "./Controllers/ControllerProduct/prodController.js"
 import fornecedor from "./Controllers/ControllerSupllier/supllierController.js"
 import conta from "./Controllers/ControllerBill/billController.js"
+import venda from "./Controllers/ControllerSale/saleController.js"
 import Express from "express"
 
 const route = Express()
@@ -12,5 +13,6 @@ route.use('/cadastro', cadastro)
 route.use('/produto', produto)
 route.use('/fornecedor', fornecedor)
 route.use('/conta', conta)
+route.use('/venda', venda)
 
 export default route
