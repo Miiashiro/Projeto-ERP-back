@@ -4,6 +4,7 @@ import produto from "./Controllers/ControllerProduct/prodController.js"
 import fornecedor from "./Controllers/ControllerSupllier/supllierController.js"
 import conta from "./Controllers/ControllerBill/billController.js"
 import venda from "./Controllers/ControllerSale/saleController.js"
+import lista from "./Controllers/ControllerSale/listController.js"
 import Express from "express"
 
 const route = Express()
@@ -14,5 +15,6 @@ route.use('/produto', produto)
 route.use('/fornecedor', fornecedor)
 route.use('/conta', conta)
 route.use('/venda', venda)
+route.use('/lista', lista)
 
 export default route

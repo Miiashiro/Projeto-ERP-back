@@ -1,8 +1,9 @@
 import Express from "express"
-import db from "../../Services/Sale/saleService.js"
+import db from "../../Services/Sale/Sale/saleService.js"
 
 const routes = Express.Router()
 
+//Mostrar dados da tabela venda
 routes.get('/', async(req, res) => {
     try{
         const results = await db.showSale()
@@ -17,38 +18,29 @@ routes.get('/', async(req, res) => {
     }
 })
 
-routes.post('/adicionar', async(req, res) => {
+routes.put('/', async(req, res) => {
     try{
-        const {id_prod, quant, dateSale} = req.body
+        const {id, prod, quant, date} = req.body
 
-        await db.createList(id_prod, quant, dateSale)
+        await db.updateSale(id, prod, quant, date)
 
-        res.status(200).send("Venda inserida")
+        res.status(200).send({message: "Venda atualizada"})
     }catch(err){
-        res.status(500).send({message: `Erro ao inserir venda`})
+        res.status(500).send({message: `Erro ao atualizar. Erro ${err}`})
     }
 })
 
-routes.post('/salvar', async(req, res) => {
+//Deletar dados da lista
+routes.delete('/:id', async(req, res) => {
     try{
-        await db.createSale()
+        const { id } = req.params
 
-        res.status(200).json({ message: 'Dados cadastrados com sucesso' })
+        await db.deleteSale(id)
 
+        res.status(200).send("Venda deletada com sucesso")
+    
     }catch(err){
-        res.status(500).send({message: `Erro ao cadastrar. Erro ${err}`})
-    }
-})
-
-routes.delete('/lista', async (req, res) => {
-    try {
-        await db.deleteList()
-
-        res.status(200).send({ message: "Venda deletada com sucesso!" })
-
-    } catch (err) {
-        res.status(500).send({ message: `Erro ao deletar. Erro ${err}` })
-        
+        res.status(500).send({message: `Erro ao deletar. Erro ${err}`})
     }
 })
 
