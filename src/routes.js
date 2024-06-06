@@ -6,6 +6,7 @@ import conta from "./Controllers/ControllerBill/billController.js"
 import venda from "./Controllers/ControllerSale/saleController.js"
 import lista from "./Controllers/ControllerSale/listController.js"
 import Express from "express"
+import lineChart from "./Controllers/ControllerGrafics/lineChartController.js"
 
 const route = Express()
 
@@ -16,5 +17,6 @@ route.use('/fornecedor', fornecedor)
 route.use('/conta', conta)
 route.use('/venda', venda)
 route.use('/lista', lista)
+route.use('/lineChart', lineChart)
 
 export default route
