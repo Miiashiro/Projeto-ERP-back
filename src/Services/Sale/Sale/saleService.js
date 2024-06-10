@@ -20,7 +20,7 @@ async function deleteSale(id){
 }
 
 async function updateSale(id, prod, quant, date){
-    const sql = "UPDATE tbl_sale SET prouto=?, quantidade=?, date_sale=? WHERE id_sale=?"
+    const sql = "UPDATE tbl_sale SET product=?, quantidade=?, date_sale=? WHERE id_sale=?"
     const data = [prod, quant, date, id]
 
     const conn = await database.connect()

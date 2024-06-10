@@ -1,10 +1,8 @@
 import database from "../../../Repository/connection.js"
 
 async function showSaleList(){
-    const sql = "select s.id_sale, p.product_name, s.quantidade, s.date_sale, p.price, (s.quantidade * p.price) as total" + 
-    " from tbl_false s, tbl_product p" +
-    " where p.id_prod = s.id_prod_fk" +
-    " group by s.id_sale, p.product_name, s.quantidade, s.date_sale, p.price;"
+    const sql = "select f.*, p.price, truncate((f.quantidade * p.price),2) total from tbl_false f, tbl_product p" +
+    " where f.product = p.product_name"
     
     const conn = await database.connect()
     const [rows] = await conn.query(sql)
@@ -14,7 +12,7 @@ async function showSaleList(){
 }
 
 async function createList(id_prod, quant, dateSale){
-    const sql = "INSERT INTO tbl_false(id_prod_fk, quantidade, date_sale) VALUES(?, ?, ?)"
+    const sql = "INSERT INTO tbl_false(product, quantidade, date_sale) VALUES(?, ?, ?)"
     const data = [id_prod, quant, dateSale]
 
     const conn = await database.connect()
@@ -40,7 +38,7 @@ async function deleteDataList(id){
 }
 
 async function createSale(){
-    const sql = "insert into tbl_sale(id_sale, id_prod_fk, quantidade, date_sale) select id_sale, id_prod_fk, quantidade, date_sale from tbl_false;"
+    const sql = "insert into tbl_sale(id_sale, product, quantidade, date_sale) select id_sale, product, quantidade, date_sale from tbl_false;"
 
     const conn = await database.connect()
     conn.query(sql)

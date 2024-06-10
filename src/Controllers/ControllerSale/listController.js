@@ -7,13 +7,11 @@ routes.get('/', async(req, res) => {
     try{
         const results = await db.showSaleList()
 
-        /*if(results.length == 0){
+        if(results.length == 0){
             res.status(204).send("Esperando entrada de dados")
         } else {
             res.status(200).json(results)
-        }*/
-
-        res.status(200).json(results)
+        }
     }catch(err){
         res.status(500).send({ message: `Erro ao tentar buscar os dados` })
     }
