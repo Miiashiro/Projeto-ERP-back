@@ -10,20 +10,20 @@ async function showSupllier(){
     return rows
 }
 
-async function createSupllier(supllier, email, tel, cnpj, cep, address, neighborhood, city, country){
+async function createSupllier(supllier, email, tel, cnpj, cep, address, neighborhood, city, state){
     const sql = 
-    "INSERT INTO tbl_supllier(supllier_name, email, tel, cnpj, cep, address, neighborhood, city, country) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)"
-    const data = [supllier, email, tel, cnpj, cep, address, neighborhood, city, country]
+    "INSERT INTO tbl_supllier(supllier_name, email, tel, cnpj, cep, address, neighborhood, city, state) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    const data = [supllier, email, tel, cnpj, cep, address, neighborhood, city, state]
 
     const conn = await database.connect()
     conn.query(sql, data)
     conn.end()
 }
 
-async function alterSupllier(id, supllier, email, tel, cnpj, cep, address, neighborhood, city, country){
+async function alterSupllier(id, supllier, email, tel, cnpj, cep, address, neighborhood, city, state){
     const sql =
-    "UPDATE tbl_supllier SET supllier_name=?, email=?, tel=?, cnpj=?, cep=?, address=?, neighborhood=?, city=?, country=? WHERE id_supllier=?"
-    const data = [supllier, email, tel, cnpj, cep, address, neighborhood, city, country, id]
+    "UPDATE tbl_supllier SET supllier_name=?, email=?, tel=?, cnpj=?, cep=?, address=?, neighborhood=?, city=?, state=? WHERE id_supllier=?"
+    const data = [supllier, email, tel, cnpj, cep, address, neighborhood, city, state, id]
 
     const conn = await database.connect()
     conn.query(sql, data)

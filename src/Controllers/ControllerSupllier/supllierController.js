@@ -19,9 +19,9 @@ routes.get('/', async(req, res) => {
 
 routes.post('/', async(req, res) => {
     try{
-        const {supllier, email, tel, cnpj, cep, address, neighborhood, city, country} = req.body
+        const {supllier, email, tel, cnpj, cep, address, neighborhood, city, state} = req.body
 
-        await db.createSupllier(supllier, email, tel, cnpj, cep, address, neighborhood, city, country)
+        await db.createSupllier(supllier, email, tel, cnpj, cep, address, neighborhood, city, state)
 
         res.status(200).send({ message: "Fornecedor criado." })
 
@@ -32,9 +32,9 @@ routes.post('/', async(req, res) => {
 
 routes.put('/', async(req, res) => {
     try{
-        const {id, supllier, email, tel, cnpj, cep, address, neighborhood, city, country} = req.body
+        const {id, supllier, email, tel, cnpj, cep, address, neighborhood, city, state} = req.body
 
-        await db.alterSupllier(id, supllier, email, tel, cnpj, cep, address, neighborhood, city, country)
+        await db.alterSupllier(id, supllier, email, tel, cnpj, cep, address, neighborhood, city, state)
 
         res.status(200).send({ message: "Fornecedor alterado"})
 

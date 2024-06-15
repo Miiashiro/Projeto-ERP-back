@@ -8,6 +8,7 @@ import venda from "./Controllers/ControllerSale/saleController.js"
 import lista from "./Controllers/ControllerSale/listController.js"
 import lineChart from "./Controllers/ControllerGrafics/lineChartController.js"
 import barChart from "./Controllers/ControllerGrafics/barChartController.js"
+import { verifyToken } from "./Middleware/jwt.js"
 
 const route = Express()
 
