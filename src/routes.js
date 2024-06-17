@@ -12,11 +12,11 @@ import { verifyToken } from "./Middleware/jwt.js"
 const route = Express()
 
 route.use('/user', user)
-route.use('/produto', produto)
-route.use('/fornecedor', fornecedor)
-route.use('/conta', conta)
-route.use('/venda', venda)
-route.use('/lista', lista)
+route.use('/produto', verifyToken, produto)
+route.use('/fornecedor', verifyToken, fornecedor)
+route.use('/conta', verifyToken, conta)
+route.use('/venda', verifyToken, venda)
+route.use('/lista', verifyToken, lista)
 route.use('/lineChart', lineChart)
 route.use('/barChart', barChart)
 

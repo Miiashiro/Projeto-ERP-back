@@ -9,12 +9,12 @@ routes.get('/', async(req, res) => {
         const results = await db.showSale()
 
         if(results.length == 0){
-            res.status(204).send("Esperando entrada de dados")
+            res.status(204).send("Esperando entrada de dados.")
         } else {
             res.status(200).json(results)
         }
     }catch(err){
-        res.status(500).send({ message: `Erro ao tentar buscar os dados` })
+        res.status(500).send({ message: `Erro ao tentar buscar os dados. Erro ${err}` })
     }
 })
 
@@ -24,9 +24,9 @@ routes.put('/', async(req, res) => {
 
         await db.updateSale(id, prod, quant, date)
 
-        res.status(200).send({message: "Venda atualizada"})
+        res.status(200).send({message: "Venda atualizada!"})
     }catch(err){
-        res.status(500).send({message: `Erro ao atualizar. Erro ${err}`})
+        res.status(500).send({message: `Erro ao atualizar. Erro: ${err}`})
     }
 })
 
@@ -37,10 +37,10 @@ routes.delete('/:id', async(req, res) => {
 
         await db.deleteSale(id)
 
-        res.status(200).send("Venda deletada com sucesso")
+        res.status(200).send("Venda deletada!")
     
     }catch(err){
-        res.status(500).send({message: `Erro ao deletar. Erro ${err}`})
+        res.status(500).send({message: `Erro ao deletar. Erro: ${err}`})
     }
 })
 

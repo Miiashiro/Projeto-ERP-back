@@ -3,56 +3,60 @@ import db from "../../Services/Bill/billService.js"
 
 const routes = Express.Router()
 
+//Buscar contas
 routes.get('/', async(req, res) => {
     try{
         const results = await db.showBill()
 
         if (results.length == 0) {
-            res.status(204).send("Esperando entrada de dados")
+            res.status(204).send("Esperando entrada de dados.")
         } else {
             res.status(200).json(results)
         }
         
     } catch(err){
-        res.status(500).send({ message: `Erro ao tentar buscar os dados` })
+        res.status(500).send({ message: `Erro ao tentar buscar os dados. Erro: ${err}` })
     }
 })
 
+//Cadastrar conta
 routes.post('/', async(req, res) => {
     try{
         const { bill, price, date } = req.body
 
         await db.createBill(bill, price, date)
 
-        res.status(200).send("Conta criado")
+        res.status(200).send("Conta criada!")
 
     }catch(err){
-        res.status(500).send({ message: `Erro ao cadastrar conta` })
+        res.status(500).send({ message: `Erro ao cadastrar conta. Erro: ${err}` })
     }
 })
 
+//Atualizar conta
 routes.put('/', async(req, res) => {
     try{
         const { id, bill, price, date } = req.body
 
         await db.updateBill(id, bill, price, date)
 
-        res.status(200).send("Conta atualizada")
+        res.status(200).send("Conta atualizada!")
 
     }catch(err){
-        res.status(500).send({ message: `Erro ao atualizar conta` })
+        res.status(500).send({ message: `Erro ao atualizar conta. Erro: ${err}` })
     }
 })
 
+//Deletar conta
 routes.delete('/:id', async(req, res) => {
     try{
         const {id} = req.params
 
         await db.deleteBill(id)
 
-        res.status(200).send("Conta deletada com sucesso")
+        res.status(200).send("Conta deletada!")
     }catch(err){
-        res.status(500).send({message: `Erro ao deletar. Erro ${err}`})
+        res.status(500).send({message: `Erro ao deletar. Erro: ${err}`})
     }
 })
 

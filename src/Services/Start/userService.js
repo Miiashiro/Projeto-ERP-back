@@ -22,6 +22,7 @@ async function loginUser(email, password){
     return rows
 }
 
+//Checar email
 async function checkEmail(email) {
     const sql = 'SELECT * FROM tbl_users WHERE email = ?'
     const data = [email]
@@ -33,6 +34,7 @@ async function checkEmail(email) {
     return rows
 }
 
+//Atualiar senha
 async function changePassword(email, newPassword) {
     const sql = 'UPDATE tbl_users SET password = ? WHERE email = ?'
     const dataNewPass = [newPassword, email]

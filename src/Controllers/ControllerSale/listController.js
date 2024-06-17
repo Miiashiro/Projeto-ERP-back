@@ -8,12 +8,12 @@ routes.get('/', async(req, res) => {
         const results = await db.showSaleList()
 
         if(results.length == 0){
-            res.status(204).send("Esperando entrada de dados")
+            res.status(204).send("Esperando entrada de dados.")
         } else {
             res.status(200).json(results)
         }
     }catch(err){
-        res.status(500).send({ message: `Erro ao tentar buscar os dados` })
+        res.status(500).send({ message: `Erro ao tentar buscar os dados. Erro ${err}` })
     }
 })
 
@@ -24,9 +24,9 @@ routes.post('/adicionar', async(req, res) => {
 
         await db.createList(id_prod, quant, dateSale)
 
-        res.status(200).send({message: "Venda inserida"})
+        res.status(200).send({message: "Venda inserida!"})
     }catch(err){
-        res.status(500).send({message: `Erro ao inserir venda`})
+        res.status(500).send({message: `Erro ao inserir venda. Erro: ${err}`})
     }
 })
 
@@ -35,10 +35,10 @@ routes.post('/salvar', async(req, res) => {
     try{
         await db.saveSale()
 
-        res.status(200).json({ message: 'Dados cadastrados com sucesso' })
+        res.status(200).json({ message: 'Dados cadastrados.' })
 
     }catch(err){
-        res.status(500).send({message: `Erro ao cadastrar. Erro ${err}`})
+        res.status(500).send({message: `Erro ao cadastrar. Erro: ${err}`})
     }
 })
 
@@ -47,10 +47,10 @@ routes.delete('/lista', async (req, res) => {
     try {
         await db.deleteList()
 
-        res.status(200).send({ message: "Venda deletada com sucesso!" })
+        res.status(200).send({ message: "Venda deletada!" })
 
     } catch (err) {
-        res.status(500).send({ message: `Erro ao deletar. Erro ${err}` })
+        res.status(500).send({ message: `Erro ao deletar. Erro: ${err}` })
         
     }
 })
@@ -62,10 +62,10 @@ routes.delete('/:id', async(req, res) => {
 
         await db.deleteDataList(id)
 
-        res.status(200).send("Venda deletada com sucesso")
+        res.status(200).send("Venda deletada!")
     
     }catch(err){
-        res.status(500).send({message: `Erro ao deletar. Erro ${err}`})
+        res.status(500).send({message: `Erro ao deletar. Erro: ${err}`})
     }
 })
 
