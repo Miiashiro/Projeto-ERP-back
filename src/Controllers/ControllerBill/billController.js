@@ -35,7 +35,7 @@ routes.put('/', async(req, res) => {
     try{
         const { id, bill, price, date } = req.body
 
-        await db.alterBill(id, bill, price, date)
+        await db.updateBill(id, bill, price, date)
 
         res.status(200).send("Conta atualizada")
 

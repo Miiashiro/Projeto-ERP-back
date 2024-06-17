@@ -33,7 +33,7 @@ routes.post('/adicionar', async(req, res) => {
 //Salvar lista
 routes.post('/salvar', async(req, res) => {
     try{
-        await db.createSale()
+        await db.saveSale()
 
         res.status(200).json({ message: 'Dados cadastrados com sucesso' })
 

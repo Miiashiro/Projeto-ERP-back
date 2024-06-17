@@ -1,5 +1,6 @@
 import database from "../../../Repository/connection.js"
 
+//Mostrar lista de venda
 async function showSaleList(){
     const sql = "select f.*, p.price, truncate((f.quantidade * p.price),2) total from tbl_false f, tbl_product p" +
     " where f.product = p.product_name"
@@ -11,6 +12,7 @@ async function showSaleList(){
     return rows
 }
 
+//Adicionar vendas a lista
 async function createList(id_prod, quant, dateSale){
     const sql = "INSERT INTO tbl_false(product, quantidade, date_sale) VALUES(?, ?, ?)"
     const data = [id_prod, quant, dateSale]
@@ -20,6 +22,7 @@ async function createList(id_prod, quant, dateSale){
     conn.end()
 }
 
+//Deletar lista
 async function deleteList(){
     const sql = "DELETE FROM tbl_false"
 
@@ -28,6 +31,7 @@ async function deleteList(){
     conn.end()
 }
 
+//Deletar dados da lista
 async function deleteDataList(id){
     const sql = "DELETE FROM tbl_false WHERE id_sale = ?"
     const data = [id]
@@ -37,7 +41,8 @@ async function deleteDataList(id){
     conn.end()
 }
 
-async function createSale(){
+//Salvar lista
+async function saveSale(){
     const sql = "insert into tbl_sale(id_sale, product, quantidade, date_sale) select id_sale, product, quantidade, date_sale from tbl_false;"
 
     const conn = await database.connect()
@@ -45,4 +50,4 @@ async function createSale(){
     conn.end()
 }
 
-export default {showSaleList, createList, deleteList, deleteDataList, createSale}
+export default {showSaleList, createList, deleteList, deleteDataList, saveSale}

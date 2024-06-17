@@ -1,5 +1,6 @@
 import database from "../../Repository/connection.js"
 
+//Mostrar produtos
 async function showProduct(){
     const sql = "SELECT * FROM tbl_product;"
 
@@ -10,6 +11,7 @@ async function showProduct(){
     return rows
 }
 
+//Criar produto
 async function createProduct(name, desc, price, quant, quantMin, quantMax){
     const sql = "INSERT INTO tbl_product(product_name, description, quantity, price, quant_min, quant_max) VALUES(?, ?, ?, ?, ?, ?)"
     const data = [ name, desc, quant, price, quantMin, quantMax ]
@@ -19,7 +21,8 @@ async function createProduct(name, desc, price, quant, quantMin, quantMax){
     conn.end()
 }
 
-async function alterProduct(id, name, desc, price, quant, quantMin, quantMax){
+//Alterar produto
+async function updateProduct(id, name, desc, price, quant, quantMin, quantMax){
     const sql = "UPDATE tbl_product SET product_name=?, description=?, quantity=?, price=?, quant_min=?, quant_max=? WHERE id_prod=?"
     const data = [name, desc, quant, price, quantMin, quantMax, id]
 
@@ -28,6 +31,7 @@ async function alterProduct(id, name, desc, price, quant, quantMin, quantMax){
     conn.end()
 }
 
+//Deletar produto
 async function deleteProd(id){
     const sql = "DELETE FROM tbl_product WHERE id_prod = ?"
     const data = [id]
@@ -37,4 +41,4 @@ async function deleteProd(id){
     conn.end()
 }
 
-export default {showProduct, createProduct, alterProduct, deleteProd}
+export default {showProduct, createProduct, updateProduct, deleteProd}

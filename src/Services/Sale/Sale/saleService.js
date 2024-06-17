@@ -1,5 +1,6 @@
 import database from "../../../Repository/connection.js"
 
+//Mostrar vendas
 async function showSale(){
     const sql = "SELECT * FROM vw_sale"
     
@@ -10,6 +11,7 @@ async function showSale(){
     return rows
 }
 
+//Deletar venda
 async function deleteSale(id){
     const sql = "DELETE FROM tbl_sale WHERE id_sale = ?"
     const data = [id]
@@ -19,6 +21,7 @@ async function deleteSale(id){
     conn.end()
 }
 
+//Alterar venda
 async function updateSale(id, prod, quant, date){
     const sql = "UPDATE tbl_sale SET product=?, quantidade=?, date_sale=? WHERE id_sale=?"
     const data = [prod, quant, date, id]

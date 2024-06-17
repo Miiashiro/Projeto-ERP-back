@@ -34,7 +34,7 @@ routes.put('/', async(req, res) => {
     try{
         const {id, supllier, email, tel, cnpj, cep, address, neighborhood, city, state} = req.body
 
-        await db.alterSupllier(id, supllier, email, tel, cnpj, cep, address, neighborhood, city, state)
+        await db.updateSupllier(id, supllier, email, tel, cnpj, cep, address, neighborhood, city, state)
 
         res.status(200).send({ message: "Fornecedor alterado"})
 

@@ -1,5 +1,6 @@
 import database from "../../Repository/connection.js"
 
+//Mostrar produto e quantidade vendidos
 async function barChart(){
     const sql = "select product, sum(quantidade) total from tbl_sale" +
     " group by product"

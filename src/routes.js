@@ -1,6 +1,5 @@
-import user from "./Controllers/ControllerStart/loginController.js"
 import Express from "express"
-import cadastro from "./Controllers/ControllerStart/userController.js"
+import user from "./Controllers/ControllerStart/startController.js"
 import produto from "./Controllers/ControllerProduct/prodController.js"
 import fornecedor from "./Controllers/ControllerSupllier/supllierController.js"
 import conta from "./Controllers/ControllerBill/billController.js"
@@ -13,7 +12,6 @@ import { verifyToken } from "./Middleware/jwt.js"
 const route = Express()
 
 route.use('/user', user)
-route.use('/cadastro', cadastro)
 route.use('/produto', produto)
 route.use('/fornecedor', fornecedor)
 route.use('/conta', conta)

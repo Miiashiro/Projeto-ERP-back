@@ -1,5 +1,6 @@
 import database from "../../Repository/connection.js"
 
+//Mostrar valor liquido recebido das vendas
 async function lineChart() {
     const sql = "SELECT 'Janeiro' label, truncate(sum(v.total) - sum(s.price), 2) AS resultado FROM vw_sale v, tbl_bill s " +
         " WHERE v.date_sale BETWEEN '2024-01-01' AND '2024-01-31' " +

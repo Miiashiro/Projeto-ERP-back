@@ -34,7 +34,7 @@ routes.put('/', async (req, res) => {
     try {
         const { id, name, desc, price, quant, quantMin, quantMax } = req.body
 
-        await db.alterProduct(id, name, desc, price, quant, quantMin, quantMax)
+        await db.updateProduct(id, name, desc, price, quant, quantMin, quantMax)
 
         res.status(200).send("Produto alterado com sucesso")
     } catch (err) {
