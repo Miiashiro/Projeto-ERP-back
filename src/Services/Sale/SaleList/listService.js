@@ -13,9 +13,9 @@ async function showSaleList(){
 }
 
 //Adicionar vendas a lista
-async function createList(id_prod, quant, dateSale){
+async function createList(prod, quant, dateSale){
     const sql = "INSERT INTO tbl_false(product, quantidade, date_sale) VALUES(?, ?, ?)"
-    const data = [id_prod, quant, dateSale]
+    const data = [prod, quant, dateSale]
 
     const conn = await database.connect()
     conn.query(sql, data)

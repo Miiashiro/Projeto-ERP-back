@@ -16,7 +16,7 @@ route.use('/produto', verifyToken, produto)
 route.use('/fornecedor', verifyToken, fornecedor)
 route.use('/conta', verifyToken, conta)
 route.use('/venda', verifyToken, venda)
-route.use('/lista', verifyToken, lista)
+route.use('/lista', lista)
 route.use('/lineChart', lineChart)
 route.use('/barChart', barChart)
 

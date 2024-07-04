@@ -20,9 +20,9 @@ routes.get('/', async(req, res) => {
 //adicionar dados na lista
 routes.post('/adicionar', async(req, res) => {
     try{
-        const {id_prod, quant, dateSale} = req.body
+        const {prod, quant, dateSale} = req.body
 
-        await db.createList(id_prod, quant, dateSale)
+        await db.createList(prod, quant, dateSale)
 
         res.status(200).send({message: "Venda inserida!"})
     }catch(err){

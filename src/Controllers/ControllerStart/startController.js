@@ -24,8 +24,6 @@ routes.post('/login', async (req, res) => {
             const token = generateToken(id_user, name_user, email_user)
             
             res.status(200).send({ message: "Login efetuado com sucesso!", token})
-
-            console.log(">>>>>", token)
         } else {
             res.status(401).send({ message: "Login incorreto!" })
         }
@@ -35,7 +33,7 @@ routes.post('/login', async (req, res) => {
 })
 
 //Cadastrar
-routes.post('/cadastrar', async (req, res) => {
+routes.post('/cadastro', async (req, res) => {
     const { name, email, password } = req.body
 
     try{
@@ -48,12 +46,12 @@ routes.post('/cadastrar', async (req, res) => {
 })
 
 //Nova senha
-routes.post('/reset', async (req, res) => {
-    const { email } = req.body
+routes.post('/redefinir', async (req, res) => {
+    const { name, email } = req.body
 
     try {
         //Checando email
-        const users = await db.checkEmail(email)
+        const users = await db.checkEmail(name, email)
 
         //Se email existe no banco de dados
         if (users.length > 0){
@@ -62,9 +60,12 @@ routes.post('/reset', async (req, res) => {
             const newPassword = generatePassword()
 
             //Atualiza a senha no banco
-            await db.changePassword(email, newPassword)
+            await db.changePassword(name, email, newPassword)
 
-            res.status(200).send({ message: "Senha alterada!"})
+            //Busca a nova senha gerada
+            const result = await db.getPassword(name, email)
+
+            res.status(200).send({ message: "Senha alterada!", result})
         } else {
             res.status(401).send({ message: "Usuário não encontrado!" })
         }

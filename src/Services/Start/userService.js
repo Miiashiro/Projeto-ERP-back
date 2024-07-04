@@ -22,10 +22,10 @@ async function loginUser(email, password){
     return rows
 }
 
-//Checar email
-async function checkEmail(email) {
-    const sql = 'SELECT * FROM tbl_users WHERE email = ?'
-    const data = [email]
+//Checar nome e email
+async function checkEmail(name, email) {
+    const sql = "SELECT * FROM tbl_users WHERE name_user = ? and email = ?"
+    const data = [name, email]
 
     const conn = await database.connect()
     const [rows] = await conn.query(sql, data)
@@ -34,16 +34,26 @@ async function checkEmail(email) {
     return rows
 }
 
-//Atualiar senha
-async function changePassword(email, newPassword) {
-    const sql = 'UPDATE tbl_users SET password = ? WHERE email = ?'
-    const dataNewPass = [newPassword, email]
+//Atualizar senha
+async function changePassword(name, email, newPassword) {
+    const sql = "UPDATE tbl_users SET password = ? WHERE name_user = ? and email = ?"
+    const newPass = [newPassword, name, email]
 
     const conn = await database.connect()
-    const [rows] = await conn.query(sql, dataNewPass)
+    await conn.query(sql, newPass)
     conn.end()
-
-    return rows
 }
 
-export default {createUser, loginUser, checkEmail, changePassword}
+//buscar senha
+async function getPassword(name, email){
+    const sql = "SELECT password FROM tbl_users WHERE name_user = ? and email = ?"
+    const data = [name, email]
+
+    const conn = await database.connect()
+    const [row] = await conn.query(sql, data)
+    conn.end()
+
+    return row
+}
+
+export default {createUser, loginUser, checkEmail, changePassword, getPassword}
