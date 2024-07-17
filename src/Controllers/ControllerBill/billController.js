@@ -21,9 +21,17 @@ routes.get('/', async(req, res) => {
 
 //Cadastrar conta
 routes.post('/', async(req, res) => {
-    try{
-        const { bill, price, date } = req.body
+    const { bill, price, date } = req.body
 
+    // Validacao
+    if(!bill){
+        return res.status(422).json({message: "O campo de nome da conta é obrigatório."})
+    }
+    if(!price){
+        return res.status(422).json({message: "O campo de preço é obrigatório"})
+    }
+
+    try{
         await db.createBill(bill, price, date)
 
         res.status(200).send("Conta criada!")

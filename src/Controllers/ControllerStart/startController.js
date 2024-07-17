@@ -36,10 +36,21 @@ routes.post('/login', async (req, res) => {
 routes.post('/cadastro', async (req, res) => {
     const { name, email, password } = req.body
 
+    // validacao
+    if(!name){
+        return res.status(422).json({message: "O campo de nome é obrigatório."})
+    }
+    if(!email){
+        return res.status(422).json({message: "O campo de email é obrigatório."})
+    }
+    if(!password){
+        return res.status(422).json({message: "O campo de senha é obrigatório."})
+    }
+
     try{
         await db.createUser(name, email, password)
 
-        res.status(200).send("Usuario criado.")
+        res.status(200).send({message: "Usuario criado."})
     }catch(err){
         res.status(500).send({ message: `Erro no sistema. Erro: ${err}` })
     }

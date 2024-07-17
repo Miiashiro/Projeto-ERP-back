@@ -2,53 +2,53 @@ import database from "../../Repository/connection.js"
 
 //Mostrar valor liquido recebido das vendas
 async function lineChart() {
-    const sql = "SELECT 'Janeiro' label, truncate(sum(v.total) - sum(s.price), 2) AS resultado FROM vw_sale v, tbl_bill s " +
-        " WHERE v.date_sale BETWEEN '2024-01-01' AND '2024-01-31' " +
-        " AND s.data_vencimento BETWEEN '2024-01-01' AND '2024-01-31' " +
+    const sql = "select 'Janeiro' label, truncate((select sum(total) from vw_sale where date_sale between '2024-01-01' and '2024-01-31') - " +
+        " (select sum(price) from tbl_bill where data_vencimento between '2024-01-01' and '2024-01-31'), 2) as total " +
+        " from vw_sale group by 'Janeiro' " +
         " UNION ALL " +
-        " SELECT 'Fevereiro' label, truncate(sum(v.total) - (sum(s.price)), 2) AS resultado FROM vw_sale v, tbl_bill s " +
-        " WHERE date_sale BETWEEN '2024-02-01' AND '2024-02-29' " +
-        " AND s.data_vencimento BETWEEN '2024-02-01' AND '2024-02-29' " +
+        " select 'Fevereiro' label, truncate((select sum(total) from vw_sale where date_sale between '2024-02-01' and '2024-02-29') - " +
+        " (select sum(price) from tbl_bill where data_vencimento between '2024-02-01' and '2024-02-29'), 2) as total " +
+        " from vw_sale group by 'Fevereiro' " +
         " UNION ALL " +
-        " SELECT 'Março' label, truncate(sum(v.total) - (sum(s.price)), 2) AS resultado FROM vw_sale v, tbl_bill s " +
-        " WHERE date_sale BETWEEN '2024-03-01' AND '2024-03-31' " +
-        " AND s.data_vencimento BETWEEN '2024-03-01' AND '2024-03-31' " +
+        " select 'Março' label, truncate((select sum(total) from vw_sale where date_sale between '2024-03-01' and '2024-03-31') - " +
+        " (select sum(price) from tbl_bill where data_vencimento between '2024-03-01' and '2024-03-31'), 2) as total " +
+        " from vw_sale group by 'Março'" +
         " UNION ALL " +
-        " SELECT 'Abril' label, truncate(sum(v.total) - (sum(s.price)), 2) AS resultado FROM vw_sale v, tbl_bill s " +
-        " WHERE date_sale BETWEEN '2024-04-01' AND '2024-04-30' " +
-        " AND s.data_vencimento BETWEEN '2024-04-01' AND '2024-04-30' " +
+        " select 'Abril' label, truncate((select sum(total) from vw_sale where date_sale between '2024-04-01' and '2024-04-30') - " +
+        " (select sum(price) from tbl_bill where data_vencimento between '2024-04-01' and '2024-04-30'), 2) as total " +
+        " from vw_sale group by 'Abril'" +
         " UNION ALL " +
-        " SELECT 'Maio' label, truncate(sum(v.total) - (sum(s.price)), 2) AS resultado FROM vw_sale v, tbl_bill s " +
-        " WHERE date_sale BETWEEN '2024-05-01' AND '2024-05-31' " +
-        " AND s.data_vencimento BETWEEN '2024-05-01' AND '2024-05-31' " +
+        " select 'Maio' label, truncate((select sum(total) from vw_sale where date_sale between '2024-05-01' and '2024-05-31') - " +
+        " (select sum(price) from tbl_bill where data_vencimento between '2024-05-01' and '2024-05-31'), 2) as total " +
+        " from vw_sale group by 'Maio'" +
         " UNION ALL " +
-        " SELECT 'Junho' label, truncate(sum(v.total) - (sum(s.price)), 2) AS resultado FROM vw_sale v, tbl_bill s " +
-        " WHERE date_sale BETWEEN '2024-06-01' AND '2024-06-30' " +
-        " AND s.data_vencimento BETWEEN '2024-06-01' AND '2024-06-30' " +
+        " select 'Junho' label, truncate((select sum(total) from vw_sale where date_sale between '2024-06-01' and '2024-06-30') - " +
+        " (select sum(price) from tbl_bill where data_vencimento between '2024-06-01' and '2024-06-30'), 2) as total " +
+        " from vw_sale group by 'Junho'" +
         " UNION ALL " +
-        " SELECT 'Julho' label, truncate(sum(v.total) - (sum(s.price)), 2) AS resultado FROM vw_sale v, tbl_bill s " +
-        " WHERE date_sale BETWEEN '2024-07-01' AND '2024-07-31' " +
-        " AND s.data_vencimento BETWEEN '2024-07-01' AND '2024-07-31' " +
+        " select 'Julho' label, truncate((select sum(total) from vw_sale where date_sale between '2024-07-01' AND '2024-07-31') - " +
+        " (select sum(price) from tbl_bill where data_vencimento between '2024-07-01' AND '2024-07-31'), 2) as total " +
+        " from vw_sale group by 'Julho' " +
         " UNION ALL " +
-        " SELECT 'Agosto' label, truncate(sum(v.total) - (sum(s.price)), 2) AS resultado FROM vw_sale v, tbl_bill s " +
-        " WHERE date_sale BETWEEN '2024-08-01' AND '2024-08-31' " +
-        " AND s.data_vencimento BETWEEN '2024-08-01' AND '2024-08-31' " +
+        " select 'Agosto' label, truncate((select sum(total) from vw_sale where date_sale between '2024-08-01' and '2024-08-31') - " +
+        " (select sum(price) from tbl_bill where data_vencimento between '2024-08-01' and '2024-08-31'), 2) as total " +
+        " from vw_sale group by 'Agosto'" +
         " UNION ALL " +
-        " SELECT 'Setembro' label, truncate(sum(v.total) - (sum(s.price)), 2) AS resultado FROM vw_sale v, tbl_bill s " +
-        " WHERE date_sale BETWEEN '2024-09-01' AND '2024-09-30' " +
-        " AND s.data_vencimento BETWEEN '2024-09-01' AND '2024-09-30' " +
+        " select 'Setembro' label, truncate((select sum(total) from vw_sale where date_sale between '2024-09-01' and '2024-09-30') - " +
+        " (select sum(price) from tbl_bill where data_vencimento between '2024-09-01' and '2024-09-30'), 2) as total " +
+        " from vw_sale group by 'Setembro' " +
         " UNION ALL " +
-        " SELECT 'Outubro' label, truncate(sum(v.total) - (sum(s.price)), 2) AS resultado FROM vw_sale v, tbl_bill s " +
-        " WHERE date_sale BETWEEN '2024-10-01' AND '2024-10-31' " +
-        " AND s.data_vencimento BETWEEN '2024-10-01' AND '2024-10-31' " +
+        " select 'Outubro' label, truncate((select sum(total) from vw_sale where date_sale between '2024-10-01' and '2024-10-31') - " +
+        " (select sum(price) from tbl_bill where data_vencimento between '2024-10-01' and '2024-10-31'), 2) as total " +
+        " from vw_sale group by 'Outubro' " +
         " UNION ALL " +
-        " SELECT 'Novembro' label, truncate(sum(v.total) - (sum(s.price)), 2) AS resultado FROM vw_sale v, tbl_bill s " +
-        " WHERE date_sale BETWEEN '2024-11-01' AND '2024-11-30' " +
-        " AND s.data_vencimento BETWEEN '2024-11-01' AND '2024-11-30' " +
+        " select 'Novembro' label, truncate((select sum(total) from vw_sale where date_sale between '2024-11-01' and '2024-11-30') - " +
+        " (select sum(price) from tbl_bill where data_vencimento between '2024-11-01' and '2024-11-30'), 2) as total " +
+        " from vw_sale group by 'Novembro'" +
         " UNION ALL " +
-        " SELECT 'Dezembro' label, truncate(sum(v.total) - (sum(s.price)), 2) AS resultado FROM vw_sale v, tbl_bill s " +
-        " WHERE date_sale BETWEEN '2024-12-01' AND '2024-12-31' " +
-        " AND s.data_vencimento BETWEEN '2024-12-01' AND '2024-12-31' "
+        " select 'Dezembro' label, truncate((select sum(total) from vw_sale where date_sale between '2024-12-01' and '2024-12-31') - " +
+        " (select sum(price) from tbl_bill where data_vencimento between '2024-12-01' and '2024-12-31'), 2) as total " +
+        " from vw_sale group by 'Dezembro'"
 
     const conn = await database.connect()
     const [rows] = await conn.query(sql)

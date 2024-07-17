@@ -20,9 +20,14 @@ routes.get('/', async(req, res) => {
 
 //Criar fornecedor
 routes.post('/', async(req, res) => {
-    try{
-        const {supllier, email, tel, cnpj, cep, address, neighborhood, city, state} = req.body
+    const {supllier, email, tel, cnpj, cep, address, neighborhood, city, state} = req.body
 
+    // Validacao
+    if(!supllier){
+        return res.status(422).json({message: "Campo de nome do fornecedor é obrigatório."})
+    }
+
+    try{
         await db.createSupllier(supllier, email, tel, cnpj, cep, address, neighborhood, city, state)
 
         res.status(200).send({ message: "Fornecedor criado." })

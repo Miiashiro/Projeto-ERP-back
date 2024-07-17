@@ -19,9 +19,22 @@ routes.get('/', async(req, res) => {
 
 //adicionar dados na lista
 routes.post('/adicionar', async(req, res) => {
-    try{
-        const {prod, quant, dateSale} = req.body
+    const {prod, quant, dateSale} = req.body
 
+    // Validacao
+    if(!prod){
+        return res.status(422).json({message: "campo de nome do produto é obrigatório."})
+    }
+
+    if(!quant){
+        return res.status(422).json({message: "campo de quantidade é obrigatório"})
+    }
+    
+    if(!dateSale){
+        return res.status(422).json({message: "campo de data é obrigatório"})
+    }
+
+    try{
         await db.createList(prod, quant, dateSale)
 
         res.status(200).send({message: "Venda inserida!"})
