@@ -18,6 +18,7 @@ routes.get('/', async(req, res) => {
     }
 })
 
+// Atualiza
 routes.put('/', async(req, res) => {
     try{
         const {id, prod, quant, date} = req.body
