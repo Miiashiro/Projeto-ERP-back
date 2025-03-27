@@ -25,11 +25,7 @@ routes.post('/', async (req, res) => {
 
     // validacao
     if (!name) {
-        return res.status(422).json({ messagem: "O campo nome do produto é obrigatório." })
-    }
-
-    if (!price) {
-        return res.status(422).json({ messagem: "O campo preço é obrigatório." })
+        return res.status(400).json({ message: "O campo do nome do produto é obrigatório." })
     }
 
     try {
@@ -44,12 +40,18 @@ routes.post('/', async (req, res) => {
 
 //Atualizar produto
 routes.put('/', async (req, res) => {
-    try {
-        const { id, name, desc, price, quant, quantMin, quantMax } = req.body
+    const { id, name, desc, price, quant, quantMin, quantMax } = req.body
+    
+    // validacao
+    if (!name) {
+        return res.status(400).json({ message: "O campo do nome do produto é obrigatório." })
+    }
 
+    try {
         await db.updateProduct(id, name, desc, price, quant, quantMin, quantMax)
 
         res.status(200).send({ message: "Produto alterado." })
+
     } catch (err) {
         res.status(500).send({ message: `Erro ao atualizar. Erro: ${err}` })
     }

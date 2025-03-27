@@ -51,7 +51,7 @@ async function getPassword(name, email){
 
     const conn = await database.connect()
     const [row] = await conn.query(sql, data)
-    conn.end()
+    conn.end() 
 
     return row
 }

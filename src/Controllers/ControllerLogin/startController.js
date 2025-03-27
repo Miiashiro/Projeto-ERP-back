@@ -8,24 +8,24 @@ const routes = Express.Router()
 //Login
 routes.post('/login', async (req, res) => {
     const { email, password } = req.body
-
+    
     try {
         //Checar se existe o usuario
         const users = await db.loginUser(email, password)
-
+        
         //Se existir um usuario
         if (users.length > 0) {
-
+            
             //Coletando dados para gerar token
             const id_user = users[0].id_user
             const name_user = users[0].name_user
             const email_user = users[0].email
-
-            const token = generateToken(id_user, name_user, email_user)
             
-            res.status(200).send({ message: "Login efetuado com sucesso!", token})
+            //const token = generateToken(id_user, name_user, email_user)
+            res.status(200).send({ message: "Login efetuado com sucesso!"/*, token*/})
+            
         } else {
-            res.status(401).send({ message: "Login incorreto!" })
+            res.status(401).send({ message: "Email ou senha invalidos"})
         }
     } catch (err) {
         res.status(500).send({ message: `Ocorreu um erro no banco de dados. ${err}` })
